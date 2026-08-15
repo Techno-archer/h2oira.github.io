@@ -42,9 +42,9 @@ nav a:hover{color:var(--gold-light);opacity:1;}
 .hero-question{font-size:1.22rem;max-width:670px;color:#eef2f7;margin-bottom:30px;}
 .hero-question strong{color:#fff;font-weight:500;}
 .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
-.assessment-hero-link{display:block;width:min(300px,100%);line-height:0;text-decoration:none;}
-.assessment-hero-link img{display:block;width:100%;height:auto;max-height:157px;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));}
-.assessment-hero-link:hover img{transform:translateY(-3px) scale(1.02);}
+.assessment-hero-link{display:block;width:190px;line-height:0;text-decoration:none;}
+.assessment-hero-link img{display:block;width:100%;height:auto;max-height:100px;object-fit:contain;filter:drop-shadow(0 8px 12px rgba(0,0,0,.22));}
+.assessment-hero-link:hover img{transform:translateY(-2px) scale(1.02);}
 .hero-right{display:flex;justify-content:flex-end;padding-top:0;}
 .hero-seal-wrap{position:relative;padding:0;}
 .hero-seal-wrap:before{display:none;}
@@ -131,8 +131,8 @@ footer{background:var(--navy);color:#fff;padding:58px 0 25px;border-top:1px soli
     .assessment-panel{grid-template-columns:1fr;text-align:center;padding:38px 28px;}
     .assessment-copy p{margin:auto;}
     .assessment-panel img{max-width:240px;max-height:126px;}
-    .assessment-hero-link{width:min(300px,82vw);margin:auto;}
-    .assessment-hero-link img{max-height:none;}
+    .assessment-hero-link{width:190px;margin:auto;}
+    .assessment-hero-link img{max-height:100px;}
     .footer-brand{justify-content:center;}
 }
 @media(max-width:560px){
@@ -141,7 +141,7 @@ footer{background:var(--navy);color:#fff;padding:58px 0 25px;border-top:1px soli
     .hero h1{font-size:2.45rem;}
     .hero h1 span{font-size:.58em;}
     .hero-question{font-size:1.05rem;}
-    .assessment-hero-link{width:100%;}
+    .assessment-hero-link{width:180px;}
     .footer-brand{flex-wrap:wrap;text-align:center;}
     .footer-brand img{width:145px;max-width:45vw;}
     .footer-divider{display:none;}
