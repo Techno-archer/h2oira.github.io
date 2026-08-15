@@ -227,17 +227,30 @@ ASSESSMENT
     border-radius:14px;
     border:1px solid rgba(199,164,74,.35);
     display:grid;
-    grid-template-columns:1fr 360px;
-    gap:45px;
+    grid-template-columns:1fr 280px;
+    gap:38px;
     align-items:center;
-    box-shadow:var(--shadow);
 }
 .assessment-copy .section-kicker{margin-bottom:13px;}
 .assessment-copy h2{color:#fff;font-size:2rem;line-height:1.2;margin-bottom:13px;}
 .assessment-copy p{color:#d5dce7;max-width:590px;}
-.assessment-badge-link{display:block;line-height:0;}
-.assessment-panel img{display:block;width:100%;max-width:360px;margin:auto;filter:drop-shadow(0 12px 18px rgba(0,0,0,.22));}
-.assessment-badge-link:hover img{transform:translateY(-4px) scale(1.015);}
+.assessment-badge-link{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:0;
+    padding:6px;
+}
+.assessment-panel img{
+    display:block;
+    width:auto;
+    height:auto;
+    max-width:240px;
+    max-height:126px;
+    margin:auto;
+    filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));
+}
+.assessment-badge-link:hover img{transform:translateY(-3px) scale(1.02);}
 
 /* ==========================================================
 FOOTER — generated visual translated into semantic HTML/CSS
@@ -287,7 +300,7 @@ RESPONSIVE
     .publication-grid{grid-template-columns:1fr;}
     .assessment-panel{grid-template-columns:1fr;text-align:center;padding:38px 28px;}
     .assessment-copy p{margin:auto;}
-    .assessment-panel img{max-width:330px;}
+    .assessment-panel img{max-width:240px;max-height:126px;}
     .footer-brand{justify-content:center;}
 }
 @media(max-width:560px){
