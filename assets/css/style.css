@@ -36,18 +36,16 @@ nav a:hover{color:var(--gold-light);opacity:1;}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.18fr .82fr;gap:42px;align-items:start;}
 .eyebrow,.section-kicker{color:var(--gold-light);font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;}
 .eyebrow{margin-bottom:18px;}
-.hero h1{font-size:clamp(2.45rem,4.55vw,4.25rem);line-height:1.06;font-weight:300;letter-spacing:-.025em;}
+.hero h1{font-size:clamp(2.35rem,4.25vw,4rem);line-height:1.06;font-weight:300;letter-spacing:-.025em;}
 .hero h1 span{display:block;color:#d5dce7;font-size:.54em;line-height:1.35;font-weight:300;letter-spacing:.01em;margin-top:16px;}
 .hero-rule{width:92px;height:2px;background:var(--gold);margin:27px 0 25px;}
 .hero-question{font-size:1.22rem;max-width:670px;color:#eef2f7;margin-bottom:30px;}
 .hero-question strong{color:#fff;font-weight:500;}
-.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
-.btn-gold,.btn-outline{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:14px 25px;border-radius:7px;text-decoration:none;font-weight:600;letter-spacing:.01em;}
-.btn-gold{background:var(--gold);color:#fff;box-shadow:0 10px 25px rgba(0,0,0,.18);}
-.btn-gold:hover{background:var(--gold-light);color:var(--navy-deep);transform:translateY(-2px);}
-.btn-outline{border:1px solid rgba(255,255,255,.72);color:#fff;}
-.btn-outline:hover{background:#fff;color:var(--navy);transform:translateY(-2px);}
-.hero-right{display:flex;justify-content:flex-end;}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.assessment-hero-link{display:block;width:min(300px,100%);line-height:0;text-decoration:none;}
+.assessment-hero-link img{display:block;width:100%;height:auto;max-height:157px;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));}
+.assessment-hero-link:hover img{transform:translateY(-3px) scale(1.02);}
+.hero-right{display:flex;justify-content:flex-end;padding-top:0;}
 .hero-seal-wrap{position:relative;padding:0;}
 .hero-seal-wrap:before{display:none;}
 .seal{width:min(420px,100%);display:block;filter:drop-shadow(0 20px 25px rgba(0,0,0,.25));}
@@ -122,7 +120,7 @@ footer{background:var(--navy);color:#fff;padding:58px 0 25px;border-top:1px soli
     .nav{min-height:74px;}
     .header-masthead{width:330px;max-width:75vw;}
     nav{display:none;}
-    .hero{padding:55px 0 70px;}
+    .hero{padding:42px 0 60px;}
     .hero-grid{grid-template-columns:1fr;text-align:center;}
     .hero-rule{margin:25px auto;}
     .hero-buttons{justify-content:center;}
@@ -133,15 +131,17 @@ footer{background:var(--navy);color:#fff;padding:58px 0 25px;border-top:1px soli
     .assessment-panel{grid-template-columns:1fr;text-align:center;padding:38px 28px;}
     .assessment-copy p{margin:auto;}
     .assessment-panel img{max-width:240px;max-height:126px;}
+    .assessment-hero-link{width:min(300px,82vw);margin:auto;}
+    .assessment-hero-link img{max-height:none;}
     .footer-brand{justify-content:center;}
 }
 @media(max-width:560px){
     section{padding:72px 0;}
     .domain-grid{grid-template-columns:1fr;}
-    .hero h1{font-size:2.6rem;}
+    .hero h1{font-size:2.45rem;}
     .hero h1 span{font-size:.58em;}
     .hero-question{font-size:1.05rem;}
-    .btn-gold,.btn-outline{width:100%;}
+    .assessment-hero-link{width:100%;}
     .footer-brand{flex-wrap:wrap;text-align:center;}
     .footer-brand img{width:145px;max-width:45vw;}
     .footer-divider{display:none;}
@@ -149,37 +149,4 @@ footer{background:var(--navy);color:#fff;padding:58px 0 25px;border-top:1px soli
     .footer-title{font-size:3rem;}
     .footer-social{flex-wrap:wrap;}
     .social-separator{display:none;}
-}
-
-/* ==========================================================
-   MARKER 009 — HERO REFINEMENT
-   CSS-only refinement; existing links and assets preserved.
-========================================================== */
-.hero .hero-buttons .btn-outline{display:none;}
-.hero .hero-buttons .btn-gold{
-    width:358px;
-    height:187px;
-    min-height:0;
-    padding:0;
-    border-radius:0;
-    background:transparent url("../images/assessment-box.png") center/contain no-repeat;
-    box-shadow:none;
-    color:transparent;
-    font-size:0;
-    line-height:0;
-    overflow:hidden;
-}
-.hero .hero-buttons .btn-gold:hover{
-    background-color:transparent;
-    transform:translateY(-2px) scale(1.01);
-    box-shadow:none;
-}
-.hero .hero-left{padding-top:0;}
-.hero .hero-right{padding-top:0;}
-@media(max-width:800px){
-    .hero .hero-buttons .btn-gold{
-        width:min(358px,82vw);
-        height:auto;
-        aspect-ratio:358 / 187;
-    }
 }
