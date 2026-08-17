@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H₂O IRA — Intake Bridge Test</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#061332;color:#fff;max-width:760px;margin:60px auto;padding:24px;line-height:1.5}
+    button{background:#d4af37;color:#061332;border:0;padding:12px 18px;border-radius:6px;font-weight:700;cursor:pointer}
+    pre{background:#fff;color:#111;padding:16px;border-radius:6px;white-space:pre-wrap}
+    .warning{border:1px solid #d4af37;padding:16px;border-radius:6px;margin-bottom:24px}
+  </style>
+</head>
+<body>
+  <h1>IRA Intake Bridge — Controlled Integration Test</h1>
+  <div class="warning">
+    <strong>TEST ONLY.</strong> This page is not linked from the public H₂O site.
+    It sends a clearly labelled synthetic payload to the deployed Google Apps Script receiver.
+  </div>
+  <button id="run">SEND CONTROLLED TEST</button>
+  <pre id="output">Ready.</pre>
+
+  <script type="module">
+    import { submitIRAAssessment } from '../assets/js/ira-intake-bridge.js';
+
+    const output = document.getElementById('output');
+    const button = document.getElementById('run');
+
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      output.textContent = 'Submitting controlled test payload…';
+
+      const payload = {
+        schema_version: 'IRA_SUBMISSION_V0.1',
+        client_timestamp: new Date().toISOString(),
+        institution: 'H2O INTEGRATION TEST — DO NOT PROCESS',
+        contact_name: 'H2O Integration Test',
+        contact_email: 'test@example.invalid',
+        assessment_level: 'Preliminary',
+        evidence_willing: 'NO — TEST ONLY',
+        responses: {
+          probe_test: 'CONTROLLED INTEGRATION TEST'
+        },
+        artifact_status: 'NONE'
+      };
+
+      try {
+        const result = await submitIRAAssessment(payload);
+        output.textContent = 'SUCCESS\n\n' + JSON.stringify(result, null, 2);
+      } catch (error) {
+        output.textContent = 'FAILED\n\n' + (error?.message || String(error));
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
