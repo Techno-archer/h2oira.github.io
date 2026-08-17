@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H₂O | Institutional Reasoning Assessment</title>
+    <meta name="description" content="Preliminary Institutional Reasoning Assessment by H₂O.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/assessment.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+</head>
+<body>
+<header class="assessment-header">
+    <div class="container">
+        <a href="index.html" aria-label="H₂O home"><img src="assets/images/h2o-masthead.png" alt="H₂O Institutional Reasoning Architecture"></a>
+        <a class="back-link" href="index.html">← H₂O Home</a>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="kicker">INSTITUTIONAL ASSURANCE</div>
+        <h1>Institutional Reasoning Assessment</h1>
+        <p>A preliminary, surface-level assessment of how an institution currently reasons, decides, commits, persists, learns and governs across consequential activity.</p>
+        <div class="notice"><strong>Important:</strong> This is a preliminary assessment only. It does not produce a diagnostic score, certification or institutional finding. Its purpose is to identify areas where a deeper, evidence-based assessment may be warranted.</div>
+    </div>
+</section>
+
+<main>
+<div class="container">
+    <div class="intro">
+        <h2>A starting point, not a verdict.</h2>
+        <p>Please answer from the institution's current practice rather than from its intended policy. The questions are deliberately concise. Where an answer raises a material question, a deeper assessment can examine the underlying evidence, decision history and operational state.</p>
+        <p>At the end, you will be asked whether you would be willing to provide evidence if a deeper assessment were undertaken.</p>
+    </div>
+
+    <form id="ira-assessment-form" novalidate>
+        <section class="form-card">
+            <h3>1. Institutional Profile</h3>
+            <p class="domain-note">Basic context for interpreting the preliminary responses.</p>
+            <div class="fields">
+                <div class="field"><label for="institution">Institution <span>(required)</span></label><input id="institution" name="institution" required></div>
+                <div class="field"><label for="contact_name">Contact name <span>(required)</span></label><input id="contact_name" name="contact_name" required></div>
+                <div class="field"><label for="contact_email">Contact email <span>(required)</span></label><input id="contact_email" name="contact_email" type="email" required></div>
+                <div class="field"><label for="assessment_level">Assessment level</label><select id="assessment_level" name="assessment_level"><option>Preliminary</option><option>Deeper — expression of interest</option></select></div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3>2. REASON</h3><p class="domain-note">How the institution develops and challenges interpretations of evidence.</p>
+            <div class="probe"><p>When evidence is ambiguous or competing interpretations exist, are alternatives explicitly challenged?</p><select name="probe_reason_1"><option value="">Select one…</option><option>Consistently</option><option>Sometimes</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can a consequential recommendation be traced to the reasoning that produced it?</p><select name="probe_reason_2"><option value="">Select one…</option><option>Yes, routinely</option><option>Partially</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Are significant assumptions and counter-arguments preserved when a conclusion is reached?</p><select name="probe_reason_3"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>3. DISTINGUISH</h3><p class="domain-note">How evidence, interpretation, judgement, decision and outcome are kept distinct.</p>
+            <div class="probe"><p>Can decision-makers distinguish recorded evidence from interpretation or opinion?</p><select name="probe_distinguish_1"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Are material changes in interpretation visible rather than silently becoming “facts”?</p><select name="probe_distinguish_2"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can the institution reconstruct what was known, believed and decided at the time?</p><select name="probe_distinguish_3"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>4. DECIDE</h3><p class="domain-note">How legitimate institutional conclusions are established.</p>
+            <div class="probe"><p>Is authority to make consequential decisions explicitly defined?</p><select name="probe_decide_1"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Informally</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can the institution distinguish an analytical recommendation from an authorized decision?</p><select name="probe_decide_2"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Is accountability for the final decision identifiable after the event?</p><select name="probe_decide_3"><option value="">Select one…</option><option>Always</option><option>Usually</option><option>Rarely</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>5. COMMIT</h3><p class="domain-note">How authorized decisions become controlled operational action.</p>
+            <div class="probe"><p>Is there a defined transition from an authorized decision to operational execution?</p><select name="probe_commit_1"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Informally</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can operational teams identify what they are authorized to change and what they are not?</p><select name="probe_commit_2"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Are consequential deviations from an authorized decision recorded and governed?</p><select name="probe_commit_3"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>6. PERSIST</h3><p class="domain-note">What consequential institutional state survives across time, people and systems.</p>
+            <div class="probe"><p>When key people leave, does consequential reasoning remain understandable and usable?</p><select name="probe_persist_1"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Are commitments and unresolved questions preserved separately from ordinary document storage?</p><select name="probe_persist_2"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can the institution reconstruct why an important position changed?</p><select name="probe_persist_3"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>7. LEARN</h3><p class="domain-note">How experience changes future institutional behaviour without uncontrolled adaptation.</p>
+            <div class="probe"><p>Are consequential outcomes reviewed against the reasoning and decision that produced them?</p><select name="probe_learn_1"><option value="">Select one…</option><option>Consistently</option><option>Sometimes</option><option>Rarely</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Does learning produce explicit institutional changes rather than informal lessons only?</p><select name="probe_learn_2"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can the institution identify what changed because of an observed outcome?</p><select name="probe_learn_3"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Rarely</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>8. GOVERN</h3><p class="domain-note">Who controls changes in institutional knowledge, commitments and operating state.</p>
+            <div class="probe"><p>Is there explicit authority over changes to consequential institutional state?</p><select name="probe_govern_1"><option value="">Select one…</option><option>Clearly</option><option>Partially</option><option>Informally</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Can computational or AI systems change institutional state without human authorization?</p><select name="probe_govern_2"><option value="">Select one…</option><option>No</option><option>In limited cases</option><option>Yes</option><option>Unclear</option></select></div>
+            <div class="probe"><p>Are material state changes attributable to an accountable human authority?</p><select name="probe_govern_3"><option value="">Select one…</option><option>Yes</option><option>Partially</option><option>No</option><option>Unclear</option></select></div>
+        </section>
+
+        <section class="form-card">
+            <h3>9. Consequential Decision & Evidence Path</h3>
+            <p class="domain-note">This does not request the underlying evidence. It identifies whether a deeper examination could be grounded in a real institutional event.</p>
+            <div class="field full"><label for="consequential_decision">Can you identify a recent consequential decision where one or more of the issues above occurred?</label><textarea id="consequential_decision" name="probe_consequential_decision" placeholder="Brief description only — no confidential material is requested here."></textarea></div>
+            <div class="field full"><label for="evidence_willing">Would you be willing to provide evidence if a deeper assessment were undertaken?</label><select id="evidence_willing" name="evidence_willing" required><option value="">Select one…</option><option value="YES">Yes</option><option value="NO">No</option><option value="CONDITIONAL">Possibly, subject to scope/confidentiality</option></select></div>
+            <div class="field full"><label for="deeper_assessment_interest">Would you like H₂O to outline possible deeper assessment levels and implementation pathways?</label><select id="deeper_assessment_interest" name="probe_deeper_interest"><option value="">Select one…</option><option>Yes</option><option>No</option><option>Later</option></select></div>
+        </section>
+
+        <div class="actions">
+            <div class="status" id="submit-status">Preliminary assessment only · No score is generated.</div>
+            <button class="send" id="send-button" type="submit">SEND ASSESSMENT</button>
+        </div>
+    </form>
+
+    <div class="confirmation" id="confirmation" role="status" aria-live="polite">
+        <h2>Assessment received.</h2>
+        <p>Thank you. Your preliminary Institutional Reasoning Assessment has been received for governed human review.</p>
+        <p>No automated institutional finding or diagnostic score has been generated.</p>
+        <div class="receipt" id="receipt"></div>
+    </div>
+</div>
+</main>
+<footer>© 2026 H₂O Institutional Reasoning Architecture · All Rights Reserved.</footer>
+
+<script type="module">
+import { buildIRAPayload, submitIRAAssessment } from './assets/js/ira-intake-bridge.js';
+
+const form = document.getElementById('ira-assessment-form');
+const button = document.getElementById('send-button');
+const status = document.getElementById('submit-status');
+const confirmation = document.getElementById('confirmation');
+const receipt = document.getElementById('receipt');
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    button.disabled = true;
+    status.textContent = 'Submitting securely…';
+
+    try {
+        const payload = buildIRAPayload(form);
+        const result = await submitIRAAssessment(payload);
+        form.style.display = 'none';
+        confirmation.classList.add('show');
+        receipt.textContent = result.assessment_id ? `Assessment reference: ${result.assessment_id}` : 'Assessment reference received.';
+    } catch (error) {
+        button.disabled = false;
+        status.textContent = error?.message || 'The submission could not be processed. Please try again.';
+    }
+});
+</script>
+</body>
+</html>
