@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>H₂O IRA — Intake Bridge Test</title>
   <style>
-    body{font-family:Arial,sans-serif;background:#061332;color:#fff;max-width:760px;margin:60px auto;padding:24px;line-height:1.5}
+    body{font-family:Arial,sans-serif;background:#061332;color:#fff;max-width:860px;margin:60px auto;padding:24px;line-height:1.5}
     button{background:#d4af37;color:#061332;border:0;padding:12px 18px;border-radius:6px;font-weight:700;cursor:pointer}
-    pre{background:#fff;color:#111;padding:16px;border-radius:6px;white-space:pre-wrap}
+    button:disabled{opacity:.6;cursor:wait}
+    pre{background:#fff;color:#111;padding:16px;border-radius:6px;white-space:pre-wrap;overflow:auto}
     .warning{border:1px solid #d4af37;padding:16px;border-radius:6px;margin-bottom:24px}
+    .note{opacity:.8;font-size:.9rem;margin-top:14px}
   </style>
 </head>
 <body>
@@ -19,10 +21,10 @@
   </div>
   <button id="run">SEND CONTROLLED TEST</button>
   <pre id="output">Ready.</pre>
+  <div class="note">Diagnostic mode exposes the receiver's HTTP status and raw response so transport and receiver errors are not hidden behind a generic failure message.</div>
 
   <script type="module">
-    import { submitIRAAssessment } from '../assets/js/ira-intake-bridge.js';
-
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwCjooWUrmjUq2MGYopgnn-972oDmRNQ1cjfqBpdaWN1mxhBtkJivs2ibnv1_-aNjpI/exec';
     const output = document.getElementById('output');
     const button = document.getElementById('run');
 
@@ -38,17 +40,42 @@
         contact_email: 'test@example.invalid',
         assessment_level: 'Preliminary',
         evidence_willing: 'NO',
-        responses: {
-          probe_test: 'CONTROLLED INTEGRATION TEST'
-        },
+        responses: { probe_test: 'CONTROLLED INTEGRATION TEST' },
         artifact_status: 'NONE'
       };
 
       try {
-        const result = await submitIRAAssessment(payload);
-        output.textContent = 'SUCCESS\n\n' + JSON.stringify(result, null, 2);
+        const response = await fetch(ENDPOINT, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        const raw = await response.text();
+        let parsed;
+        try { parsed = JSON.parse(raw); } catch (_) { parsed = null; }
+
+        output.textContent = [
+          `HTTP STATUS: ${response.status} ${response.statusText}`,
+          `OK: ${response.ok}`,
+          `CONTENT-TYPE: ${response.headers.get('content-type') || '(not exposed)'}`,
+          '',
+          'RAW RESPONSE:',
+          raw || '(empty response)',
+          '',
+          'PARSED RESPONSE:',
+          parsed ? JSON.stringify(parsed, null, 2) : '(not valid JSON)'
+        ].join('\n');
       } catch (error) {
-        output.textContent = 'FAILED\n\n' + (error?.message || String(error));
+        output.textContent = [
+          'TRANSPORT ERROR',
+          '',
+          error?.name || 'Error',
+          error?.message || String(error),
+          '',
+          'This indicates the browser could not complete the cross-origin request.'
+        ].join('\n');
       } finally {
         button.disabled = false;
       }
