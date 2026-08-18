@@ -1,16 +1,13 @@
 /**
  * H2O — Institutional Reasoning Assessment
- * IRA-ASSESSMENT-WEB-001 / GitHub-side intake bridge v0.1
- *
- * STAGING RULE:
- * This module is intentionally NOT imported by index.html or assessment.html yet.
- * It provides the production submission boundary for the future assessment page.
+ * IRA-ASSESSMENT-WEB-001 / GitHub-side intake bridge v0.2
  *
  * Boundary:
  *   Browser -> HTTPS POST -> Google Apps Script Intake Receiver
  *   Google Apps Script -> Drive JSON artifact + Intake Ledger
  *
- * This file performs NO diagnostic reasoning, scoring, or capability rating.
+ * This module performs transport/validation only.
+ * It does NOT score, diagnose, rate, or invoke IROS.
  */
 
 const IRA_INTAKE_ENDPOINT =
@@ -18,33 +15,37 @@ const IRA_INTAKE_ENDPOINT =
 
 const IRA_INTAKE_VERSION = 'IRA_SUBMISSION_V0.1';
 
+function value(form, name) {
+    const field = form?.elements?.namedItem(name);
+    return field ? String(field.value ?? '').trim() : '';
+}
+
 /**
- * Build the transport payload from a form-like object.
- * The field names are deliberately aligned with the intake ledger and
- * preliminary assessment architecture.
+ * Build the canonical receiver payload from assessment.html.
+ *
+ * Important boundary decisions:
+ * - Assessment level remains PRELIMINARY at intake.
+ * - Interest in deeper work is captured separately.
+ * - CONDITIONAL evidence willingness is preserved as CONDITIONAL.
+ * - All preliminary probe responses are retained under `responses`.
  */
 export function buildIRAPayload(form) {
-    const value = (name) => {
-        const field = form?.elements?.namedItem(name);
-        return field ? String(field.value ?? '').trim() : '';
-    };
-
     return {
-        schema_version: IRA_INTAKE_VERSION,
-        client_timestamp: new Date().toISOString(),
+        schema_version: '0.1',
+        institution: value(form, 'institution'),
+        contact_name: value(form, 'contact_name'),
+        contact_email: value(form, 'contact_email'),
 
-        institution: value('institution'),
-        contact_name: value('contact_name'),
-        contact_email: value('contact_email'),
+        // The public instrument is a preliminary assessment.
+        // A deeper engagement is expressed through the separate interest field.
+        assessment_level: 'Preliminary',
 
-        assessment_level: value('assessment_level') || 'Preliminary',
-        evidence_willing: value('evidence_willing'),
+        evidence_willing: value(form, 'evidence_willing'),
 
-        // Preliminary assessment responses only.
-        // No diagnostic score is generated or transmitted here.
+        consequential_decision: value(form, 'probe_consequential_decision'),
+        deeper_assessment_interest: value(form, 'probe_deeper_interest'),
+
         responses: collectAssessmentResponses(form),
-
-        // Artifact handling remains a separate controlled stage.
         artifact_status: 'NONE'
     };
 }
@@ -68,14 +69,16 @@ function collectAssessmentResponses(form) {
     return responses;
 }
 
-/**
- * Lightweight browser-side validation.
- * The receiver remains authoritative for transport/schema validation.
- */
 export function validateIRAPayload(payload) {
-    const required = ['institution', 'contact_name', 'contact_email'];
-    const missing = required.filter((key) => !payload?.[key]);
+    const required = [
+        'institution',
+        'contact_name',
+        'contact_email',
+        'assessment_level',
+        'evidence_willing'
+    ];
 
+    const missing = required.filter((key) => !payload?.[key]);
     if (missing.length) {
         return {
             valid: false,
@@ -88,18 +91,20 @@ export function validateIRAPayload(payload) {
         return { valid: false, message: 'Please provide a valid contact email address.' };
     }
 
+    if (payload.assessment_level !== 'Preliminary') {
+        return { valid: false, message: 'Assessment intake must remain Preliminary.' };
+    }
+
+    if (!['YES', 'NO', 'CONDITIONAL'].includes(payload.evidence_willing)) {
+        return { valid: false, message: 'Please specify whether supporting evidence could be provided.' };
+    }
+
     return { valid: true, message: 'OK' };
 }
 
-/**
- * Submit a validated payload to the Google Workspace intake receiver.
- * Content-Type text/plain avoids an unnecessary CORS preflight with Apps Script.
- */
 export async function submitIRAAssessment(payload) {
     const validation = validateIRAPayload(payload);
-    if (!validation.valid) {
-        throw new Error(validation.message);
-    }
+    if (!validation.valid) throw new Error(validation.message);
 
     const response = await fetch(IRA_INTAKE_ENDPOINT, {
         method: 'POST',
@@ -123,10 +128,6 @@ export async function submitIRAAssessment(payload) {
     return result;
 }
 
-/**
- * Safe operational state labels for the client UI.
- * These mirror the Drive intake lifecycle without exposing internal analysis.
- */
 export const IRA_INTAKE_STATES = Object.freeze({
     NEW: 'NEW',
     PROCESSING: 'PROCESSING',
