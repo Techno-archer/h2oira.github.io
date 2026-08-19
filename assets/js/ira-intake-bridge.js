@@ -11,13 +11,21 @@
  */
 
 const IRA_INTAKE_ENDPOINT =
-    'https://script.google.com/macros/s/AKfycbwCjooWUrmjUq2MGYopgnn-972oDmRNQ1cjfqBpdaWN1mxhBtkJivs2ibnv1_-aNjpI/exec';
+    'https://script.google.com/macros/s/AKfycbwy6LTXQikoALkEcBsBK09Lz4NvSuWSkyAdeVX51qRkrJ_n0oWWQf9C4eShX4UMnTyt/exec';
 
-const IRA_INTAKE_VERSION = 'IRA_SUBMISSION_V0.1';
+const IRA_INTAKE_VERSION = 'IRA_SUBMISSION_V0.2';
 
 function value(form, name) {
     const field = form?.elements?.namedItem(name);
     return field ? String(field.value ?? '').trim() : '';
+}
+
+function normaliseEvidenceWilling(value) {
+    const v = String(value ?? '').trim().toLowerCase();
+    if (v === 'yes' || v === 'willing' || v === 'true') return 'YES';
+    if (v === 'no' || v === 'not yet' || v === 'false') return 'NO';
+    if (v === 'conditional' || v === 'possibly' || v === 'possibly, subject to scope/confidentiality' || v === 'possibly, subject to scope/confidentiality.') return 'CONDITIONAL';
+    return '';
 }
 
 /**
@@ -31,20 +39,14 @@ function value(form, name) {
  */
 export function buildIRAPayload(form) {
     return {
-        schema_version: '0.1',
+        schema_version: '0.2',
         institution: value(form, 'institution'),
         contact_name: value(form, 'contact_name'),
         contact_email: value(form, 'contact_email'),
-
-        // The public instrument is a preliminary assessment.
-        // A deeper engagement is expressed through the separate interest field.
         assessment_level: 'Preliminary',
-
-        evidence_willing: value(form, 'evidence_willing'),
-
+        evidence_willing: normaliseEvidenceWilling(value(form, 'evidence_willing')),
         consequential_decision: value(form, 'probe_consequential_decision'),
         deeper_assessment_interest: value(form, 'probe_deeper_interest'),
-
         responses: collectAssessmentResponses(form),
         artifact_status: 'NONE'
     };
@@ -87,7 +89,7 @@ export function validateIRAPayload(payload) {
     }
 
     const email = String(payload.contact_email);
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
         return { valid: false, message: 'Please provide a valid contact email address.' };
     }
 
