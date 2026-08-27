@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "H2O Aurora Fast State",
+  "type": "object",
+  "required": ["protocol", "current_objective", "locked_decisions", "open_items", "next_action"],
+  "properties": {
+    "protocol": {"const": "Aurora Protocol v1.1"},
+    "current_objective": {"type": "string"},
+    "locked_decisions": {"type": "array", "items": {"type": "string"}},
+    "open_items": {"type": "array", "items": {"type": "string"}},
+    "next_action": {"type": "string"},
+    "active_project": {"type": "string"},
+    "architecture_state": {"type": "object"},
+    "evidence_state": {"type": "object"},
+    "notebook_state": {"type": "object"},
+    "artifact_state": {"type": "object"}
+  }
+}
